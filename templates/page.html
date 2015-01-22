@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+      <title>User Form Demo</title>
+    </head>
+    <body>
+        {{ form.username.label }}: {{ form.username }}
+        <div data-toggle="fieldset" id="phone-fieldset">
+            {{ form.phone.label }} <button type="button" data-toggle="fieldset-add-row" data-target="#phone-fieldset">+</button>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Number</th>
+                    <th>Extension</th>
+                    <th></th>
+                </tr>
+                {% for phone in form.phone %}
+                <tr data-toggle="fieldset-entry">
+                    <td>{{ phone.phonetype }}</td>
+                    <td>{{ phone.number }}</td>
+                    <td>{{ phone.ext }}</td>
+                    <td><button type="button" data-toggle="fieldset-remove-row" id="phone-{{loop.index0}}-remove">-</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {{ form.submit }}
+        <script src="{{ url_for("static", filename="js/jquery-1.10.2.min.js") }}"></script>
+        <script src="{{ url_for("static", filename="js/page.js") }}"></script>
+    </body>
+</html>
